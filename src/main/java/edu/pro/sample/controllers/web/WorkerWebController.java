@@ -40,6 +40,8 @@ public class WorkerWebController {
     Worker get(@PathVariable(value = "id")String id){
         return service.get(id);
     }
+
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String addWorker(Model model){
         WorkerForm workerForm = new WorkerForm();
@@ -47,9 +49,9 @@ public class WorkerWebController {
         model.addAttribute("workerForm", workerForm);
         return "workerAdd";
     }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     String create(Model model, @ModelAttribute("workerForm") WorkerForm workerForm) {
-
         Worker newWorker = new Worker(workerForm.getName(),
                 workerForm.getOccupation(),
                 workerForm.getSalary());
@@ -59,9 +61,34 @@ public class WorkerWebController {
         return "redirect:/worker/list";
 
     }
-    @PostMapping("/update")
-    Worker update(@Valid @RequestBody Worker worker) {
-        return service.update(worker);
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public String updateWorker(Model model,  @PathVariable("id") String id){
+        Worker workerToUpdate = service.get(id);
+        WorkerForm workerForm = new WorkerForm();
+        workerForm.setName(workerToUpdate.getName());
+        workerForm.setId(id);
+        workerForm.setOccupation(workerToUpdate.getOccupation());
+        workerForm.setSalary(workerToUpdate.getSalary());
+        model.addAttribute("workerForm", workerForm);
+        return "workerUpdate";
     }
 
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    String update(Model model, @ModelAttribute("workerForm") WorkerForm workerForm,
+                  @PathVariable("id") String id) {
+        System.out.println("Update is called");
+        Worker newWorker = new Worker(
+                workerForm.getName(),
+                workerForm.getOccupation(),
+                workerForm.getSalary()
+        );
+        newWorker.setId(id);
+
+        service.update(newWorker);
+
+
+        return "redirect:/worker/list";
+
+    }
 }
