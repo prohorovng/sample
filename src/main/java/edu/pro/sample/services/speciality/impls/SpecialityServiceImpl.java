@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+//ggggggggggggg
 @Service
 public class SpecialityServiceImpl {
     List<Speciality> specialities = new ArrayList<>(
