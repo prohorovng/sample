@@ -11,14 +11,17 @@ public class Worker {
     private String name;
     private String occupation;
     private int salary;
+    private Speciality speciality;
 
     public Worker() {
     }
 
-    public Worker(String name, String occupation, int salary) {
+    public Worker(String name, String occupation, int salary, Speciality speciality) {
+
         this.name = name;
         this.occupation = occupation;
         this.salary = salary;
+        this.speciality = speciality;
     }
 
     public String getId() {
@@ -53,6 +56,14 @@ public class Worker {
         this.salary = salary;
     }
 
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
+    }
+
     @Override
     public String toString() {
         return "Worker{" +
@@ -60,19 +71,7 @@ public class Worker {
                 ", name='" + name + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", salary=" + salary +
+                ", speciality=" + speciality +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Worker worker = (Worker) o;
-        return getId().equals(worker.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
     }
 }

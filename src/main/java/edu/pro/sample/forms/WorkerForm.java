@@ -5,6 +5,15 @@ public class WorkerForm {
     private String name;
     private String occupation;
     private int salary;
+    private String speciality;
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
 
     public String getId() {
         return id;

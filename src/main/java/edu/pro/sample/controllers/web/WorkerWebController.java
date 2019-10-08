@@ -1,16 +1,18 @@
 package edu.pro.sample.controllers.web;
 
 import edu.pro.sample.forms.WorkerForm;
+import edu.pro.sample.model.Speciality;
 import edu.pro.sample.model.Worker;
-import edu.pro.sample.services.impls.WorkerServiceImpl;
+import edu.pro.sample.services.worker.impls.WorkerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequestMapping("/worker")
 @CrossOrigin("*")
@@ -45,16 +47,21 @@ public class WorkerWebController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String addWorker(Model model){
         WorkerForm workerForm = new WorkerForm();
+        Map<String, String> mavs = service.getSpecialities().stream()
+                .collect(Collectors.toMap(Speciality::getId, Speciality::getName));
 
+        model.addAttribute("mavs", mavs);
         model.addAttribute("workerForm", workerForm);
         return "workerAdd";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("workerForm") WorkerForm workerForm) {
+    String create(@ModelAttribute("workerForm") WorkerForm workerForm) {
+        System.out.println("Method Create POST was called");
         Worker newWorker = new Worker(workerForm.getName(),
                 workerForm.getOccupation(),
-                workerForm.getSalary());
+                workerForm.getSalary(), null);
+
         service.create(newWorker);
 
 
@@ -81,7 +88,7 @@ public class WorkerWebController {
         Worker newWorker = new Worker(
                 workerForm.getName(),
                 workerForm.getOccupation(),
-                workerForm.getSalary()
+                workerForm.getSalary(), null
         );
         newWorker.setId(id);
 

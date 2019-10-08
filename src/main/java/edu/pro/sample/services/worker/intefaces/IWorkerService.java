@@ -1,4 +1,4 @@
-package edu.pro.sample.services.intefaces;
+package edu.pro.sample.services.worker.intefaces;
 
 import edu.pro.sample.model.Worker;
 
@@ -9,6 +9,6 @@ public interface IWorkerService {
     Worker get(String id);
     Worker create(Worker worker);
     Worker update(Worker worker);
-    Worker delete (String id);
+    Worker delete(String id);
 
 }

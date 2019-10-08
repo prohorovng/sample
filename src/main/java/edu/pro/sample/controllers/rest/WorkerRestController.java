@@ -1,7 +1,7 @@
 package edu.pro.sample.controllers.rest;
 
 import edu.pro.sample.model.Worker;
-import edu.pro.sample.services.impls.WorkerServiceImpl;
+import edu.pro.sample.services.worker.impls.WorkerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
