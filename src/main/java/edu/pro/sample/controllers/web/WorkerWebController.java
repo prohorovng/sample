@@ -98,7 +98,7 @@ public class WorkerWebController {
         Worker newWorker = new Worker(workerForm.getName(),
                 workerForm.getOccupation(),
                 workerForm.getSalary(), speciality);
-
+newWorker.setId(id);
         service.create(newWorker);
 
 
